@@ -1,0 +1,26 @@
+rules_version = '2';
+
+// Reglas para "Nuestra Libreta" v2.
+//
+// Decisión del proyecto: NO hay login (Andy y Marjorie usan un selector simple,
+// no Firebase Auth). Por lo tanto estas reglas son intencionalmente abiertas
+// dentro de /libretas/** — cualquiera con la URL de la app puede leer y escribir.
+// Esto es aceptable para una libreta privada compartida entre dos personas,
+// pero es importante que el link y las credenciales del proyecto de Firebase
+// (firebaseConfig) no se compartan públicamente más allá de eso.
+//
+// Si en el futuro quieren más seguridad sin agregar login, dos opciones simples:
+//   1) Activar Firebase App Check (bloquea accesos que no vengan de la app real).
+//   2) Restringir la API key de Firebase (Google Cloud Console → Credentials)
+//      para que solo funcione desde su dominio de GitHub Pages / Firebase Hosting.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /libretas/{libretaId}/{collection}/{docId} {
+      allow read, write: if collection in ['trips', 'places', 'events', 'expenses'];
+    }
+    // Cualquier otra ruta queda bloqueada por defecto.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

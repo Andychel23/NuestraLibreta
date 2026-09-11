@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// Mismo criterio que firestore.rules: sin login, acceso abierto dentro de la
+// carpeta de la libreta, con límite de tamaño por archivo para evitar abuso
+// accidental (las fotos ya se comprimen en el navegador antes de subir).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /libretas/{libretaId}/{allPaths=**} {
+      allow read, write: if request.resource == null || request.resource.size < 8 * 1024 * 1024;
+    }
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
