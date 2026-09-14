@@ -1,0 +1,18 @@
+.mode-toggle { display: flex; gap: 4px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 3px; flex: 0 0 auto; }
+.mode-toggle button { width: 34px; height: 32px; border: none; background: none; border-radius: 7px; cursor: pointer; color: var(--ink-soft); font-size: 14px; }
+.mode-toggle button.active { background: var(--primary); color: var(--on-primary); }
+
+.chip-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.chip-sm { font-size: 11.5px; padding: 6px 11px; border-radius: 8px; border: 1px dashed var(--line); color: var(--ink-soft); cursor: pointer; background: var(--surface-2); }
+.chip-sm.active { border-style: solid; border-color: var(--accent); color: var(--accent); background: transparent; }
+
+.lug-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.lug-card { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; cursor: pointer; }
+.lug-photo { width: 100%; height: 100px; object-fit: cover; display: block; }
+.lug-photo-empty { display: flex; align-items: center; justify-content: center; font-size: 26px; background: var(--surface-2); }
+.lug-stamp { position: absolute; top: 8px; right: 8px; font-size: 9.5px; font-weight: 700; background: rgba(11,11,13,0.75); color: #fff; padding: 3px 7px; border-radius: 20px; z-index: 2; }
+.lug-body { padding: 10px 11px 12px; }
+.lug-cat { font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); }
+.lug-body h3 { font-size: 15px; margin: 4px 0 2px; }
+.lug-city { font-size: 11px; color: var(--ink-soft); }
+.lug-date { font-size: 10.5px; color: var(--ink-soft); margin-top: 4px; }
