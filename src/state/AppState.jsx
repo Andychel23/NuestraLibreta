@@ -8,6 +8,7 @@ export function AppProvider({ children }) {
   const places = useCollection('places')
   const events = useCollection('events')
   const expenses = useCollection('expenses')
+  const todos = useCollection('todos')
 
   const [currentUser, setCurrentUserState] = useState(() => localStorage.getItem('nl-user') || '')
   const setCurrentUser = useCallback((name) => {
@@ -30,7 +31,7 @@ export function AppProvider({ children }) {
   const closeSheet = useCallback(() => setSheet(null), [])
 
   const value = {
-    trips, places, events, expenses,
+    trips, places, events, expenses, todos,
     currentUser, setCurrentUser,
     toast, toastMsg, toastShow,
     sheet, openSheet, closeSheet,

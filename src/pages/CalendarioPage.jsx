@@ -3,6 +3,7 @@ import { useApp } from '../state/AppState'
 import { MONTH_NAMES, WEEKDAY_LABELS, buildMonthGrid, buildWeekDays, nextOccurrence, daysUntil, toDate } from '../lib/dates'
 import { EVENT_TYPE_MAP, CAL_LEGEND } from '../lib/constants'
 import Sheet from '../components/Sheet'
+import PendientesSection from '../components/PendientesSection'
 import './CalendarioPage.css'
 
 function ymdLocal(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}` }
@@ -110,6 +111,8 @@ export default function CalendarioPage() {
           onDay={openDay} />
       )}
       {view === 'agenda' && <AgendaView evMap={evMap} onDay={openDay} />}
+
+      <PendientesSection />
 
       <div className="upcoming">
         <h3 className="upcoming-title">Próximos eventos</h3>

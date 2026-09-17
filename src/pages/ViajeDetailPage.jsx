@@ -139,6 +139,7 @@ export default function ViajeDetailPage() {
             <div className="empty-state"><div className="big">Sin fotos todavía</div><div className="hint">Las fotos que subas a los lugares de este viaje aparecen aquí automáticamente.</div></div>
           ) : (
             <>
+              <button className="btn btn-primary btn-block" style={{ marginBottom: 14 }} onClick={() => nav(`/viajes/${trip.id}/album`)}>📖 Ver álbum y descargar PDF</button>
               <p className="page-sub" style={{ marginBottom: 10 }}>📷 {allPhotos.length} foto{allPhotos.length !== 1 ? 's' : ''}</p>
               <div className="photo-gallery">
                 {allPhotos.map((ph, i) => (

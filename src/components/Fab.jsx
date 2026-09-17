@@ -7,6 +7,7 @@ const ACTIONS = [
   { key: 'place', icon: '📍', label: 'Nuevo lugar' },
   { key: 'event', icon: '📅', label: 'Nuevo evento' },
   { key: 'expense', icon: '💰', label: 'Nuevo gasto' },
+  { key: 'todo', icon: '✅', label: 'Nueva tarea' },
 ]
 
 export default function Fab() {
@@ -19,6 +20,7 @@ export default function Fab() {
     if (key === 'place') openSheet('place-form')
     if (key === 'event') openSheet('event-form')
     if (key === 'expense') openSheet('expense-form')
+    if (key === 'todo') openSheet('todo-form')
   }
 
   return (

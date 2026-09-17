@@ -8,6 +8,7 @@ import SheetHost from './components/SheetHost'
 import CalendarioPage from './pages/CalendarioPage'
 import ViajesPage from './pages/ViajesPage'
 import ViajeDetailPage from './pages/ViajeDetailPage'
+import AlbumViewerPage from './pages/AlbumViewerPage'
 import LugaresPage from './pages/LugaresPage'
 import FinanzasPage from './pages/FinanzasPage'
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<CalendarioPage />} />
           <Route path="/viajes" element={<ViajesPage />} />
           <Route path="/viajes/:id" element={<ViajeDetailPage />} />
+          <Route path="/viajes/:id/album" element={<AlbumViewerPage />} />
           <Route path="/lugares" element={<LugaresPage />} />
           <Route path="/finanzas" element={<FinanzasPage />} />
         </Routes>

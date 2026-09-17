@@ -5,14 +5,14 @@ import './Header.css'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
-  const { currentUser, setCurrentUser, trips, places, events, expenses, toast } = useApp()
+  const { currentUser, setCurrentUser, trips, places, events, expenses, todos, toast } = useApp()
   const [seeding, setSeeding] = useState(false)
 
   async function handleSeed() {
     if (!confirm('Esto agrega un viaje, lugares, eventos y gastos de ejemplo (Chachapoyas). ¿Continuar?')) return
     setSeeding(true)
     try {
-      await seedDemoData({ trips, places, events, expenses })
+      await seedDemoData({ trips, places, events, expenses, todos })
       toast('Datos de ejemplo agregados.')
     } catch { toast('No se pudo cargar el ejemplo.') }
     setSeeding(false)

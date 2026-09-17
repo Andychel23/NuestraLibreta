@@ -1,6 +1,6 @@
 // Datos de demostración: un viaje a Chachapoyas con lugares, eventos e itinerario.
 // Se agregan solo cuando el usuario lo pide desde Ajustes (no se cargan automáticamente).
-export async function seedDemoData({ trips, places, events, expenses }) {
+export async function seedDemoData({ trips, places, events, expenses, todos }) {
   const tripId = await trips.add({
     name: 'Chachapoyas', destination: 'Amazonas, Perú',
     dateFrom: '2026-10-26', dateTo: '2026-11-03',
@@ -36,4 +36,10 @@ export async function seedDemoData({ trips, places, events, expenses }) {
   await expenses.add({ description: 'Pasajes Lima–Tarapoto', amount: 480, currency: 'PEN', paidBy: 'Andy', forWhom: 'ambos', category: 'transporte', date: '2026-09-15', tripId, placeId: null, note: '', receipt: null, type: 'gasto' })
   await expenses.add({ description: 'Hotel Chachapoyas (3 noches)', amount: 350, currency: 'PEN', paidBy: 'Andy', forWhom: 'ambos', category: 'alojamiento', date: '2026-10-28', tripId, placeId: null, note: '', receipt: null, type: 'gasto' })
   await expenses.add({ description: 'Tour Kuelap', amount: 180, currency: 'PEN', paidBy: 'Marjorie', forWhom: 'ambos', category: 'tours', date: '2026-10-29', tripId, placeId: null, note: '', receipt: null, type: 'gasto' })
+
+  if (todos) {
+    await todos.add({ text: 'Reservar el hotel de Chachapoyas', assignedTo: 'Andy', tripId, dueDate: '2026-10-01', done: true, doneAt: new Date().toISOString() })
+    await todos.add({ text: 'Comprar repelente y ropa de lluvia', assignedTo: 'Ambos', tripId, dueDate: '2026-10-20', done: false, doneAt: null })
+    await todos.add({ text: 'Comprar regalo cumpleaños Marjorie', assignedTo: 'Andy', tripId: null, dueDate: '2026-11-05', done: false, doneAt: null })
+  }
 }
