@@ -5,7 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 // IMPORTANT: si despliegas en GitHub Pages en un repo que NO es <usuario>.github.io,
 // cambia `base` a '/nombre-del-repo/' (con las barras). Si usas Firebase Hosting
 // (dominio propio o *.web.app), deja `base: '/'`.
-const REPO_BASE = '/Andychel/'
+const REPO_BASE = '/NuestraLibreta/'
 
 export default defineConfig({
   base: process.env.DEPLOY_TARGET === 'ghpages' ? REPO_BASE : '/',
