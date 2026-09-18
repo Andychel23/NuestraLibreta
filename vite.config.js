@@ -5,7 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 // IMPORTANT: si despliegas en GitHub Pages en un repo que NO es <usuario>.github.io,
 // cambia `base` a '/nombre-del-repo/' (con las barras). Si usas Firebase Hosting
 // (dominio propio o *.web.app), deja `base: '/'`.
-const REPO_BASE = '/NuestraLibreta/'
+const REPO_BASE = '/Andychel/'
 
 export default defineConfig({
   base: process.env.DEPLOY_TARGET === 'ghpages' ? REPO_BASE : '/',
@@ -18,8 +18,8 @@ export default defineConfig({
         name: 'Nuestra Libreta — Andy & Marjorie',
         short_name: 'Nuestra Libreta',
         description: 'Libreta digital de viajes, lugares, finanzas y fechas importantes',
-        theme_color: '#0B0B0D',
-        background_color: '#0B0B0D',
+        theme_color: '#356B2D',
+        background_color: '#F5F1E8',
         display: 'standalone',
         start_url: '.',
         scope: '.',

@@ -3,6 +3,7 @@ import { useApp } from '../state/AppState'
 import { fmtMoney, computeBalance, sumByCategory } from '../lib/money'
 import { EXPENSE_CATS, catInfo } from '../lib/constants'
 import { fmtDate } from '../lib/dates'
+import IconCoin from '../components/icons/IconCoin'
 import './FinanzasPage.css'
 
 export default function FinanzasPage() {
@@ -62,9 +63,10 @@ export default function FinanzasPage() {
           <div className="page-sub" style={{ marginBottom: 10 }}>Gasto por categoría</div>
           {catEntries.map(([catId, amt]) => {
             const c = catInfo(EXPENSE_CATS, catId)
+            const Icon = c.icon
             return (
               <div key={catId} className="cat-bar-row">
-                <span className="cat-bar-lbl">{c.icon} {c.label}</span>
+                <span className="cat-bar-lbl"><Icon size={15} stroke={1.8} />{c.label}</span>
                 <div className="cat-bar-track"><div className="cat-bar-fill" style={{ width: `${(amt / maxCat) * 100}%` }} /></div>
                 <span className="cat-bar-amt">{fmtMoney(amt)}</span>
               </div>
@@ -75,14 +77,18 @@ export default function FinanzasPage() {
 
       <div className="exp-list">
         {list.length === 0 ? (
-          <div className="empty-state"><div className="big">Sin gastos registrados</div><div className="hint">Anoten lo que van pagando y aquí se calcula solo quién le debe a quién.</div></div>
+          <div className="empty-state">
+            <div className="icon-wrap"><IconCoin size={34} stroke={1.3} /></div>
+            <div className="big">Sin gastos registrados</div>
+            <div className="hint">Anoten lo que van pagando y aquí se calcula solo quién le debe a quién.</div>
+          </div>
         ) : list.map(e => {
           const trip = trips.items.find(t => t.id === e.tripId)
           return (
             <div key={e.id} className="expense-row" onClick={() => e.type !== 'liquidacion' && openSheet('expense-form', { expense: e })}>
               <div className="who">{e.paidBy === 'Andy' ? 'A' : 'M'}</div>
               <div className="desc">
-                <div className="d">{e.type === 'liquidacion' ? '🤝 ' : ''}{e.description}</div>
+                <div className="d">{e.description}</div>
                 <div className="m">{e.paidBy} pagó · {fmtDate(e.date)}{trip ? ' · ' + trip.name : ''}</div>
               </div>
               <div className="amt">{fmtMoney(e.amount)}</div>

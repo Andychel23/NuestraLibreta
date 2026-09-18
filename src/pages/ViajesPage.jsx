@@ -1,62 +1,59 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { IconPlaneTilt, IconPlane } from '@tabler/icons-react'
 import { useApp } from '../state/AppState'
 import { fmtRange, tripStatus } from '../lib/dates'
 import { TRIP_STATUS_LABEL } from '../lib/constants'
 import './ViajesPage.css'
 
 export default function ViajesPage() {
-  const { trips, places } = useApp()
-  const [filter, setFilter] = useState('todos')
+  const { trips } = useApp()
   const nav = useNavigate()
 
   const list = useMemo(() => {
-    let arr = trips.items.map(t => ({ ...t, status: tripStatus(t) }))
-    if (filter !== 'todos') arr = arr.filter(t => t.status === filter)
-    arr.sort((a, b) => (b.dateFrom || '').localeCompare(a.dateFrom || ''))
-    return arr
-  }, [trips.items, filter])
+    return [...trips.items]
+      .map(t => ({ ...t, status: tripStatus(t) }))
+      .sort((a, b) => (b.dateFrom || '').localeCompare(a.dateFrom || ''))
+  }, [trips.items])
 
   return (
     <div className="page">
       <div className="page-header">
         <div>
           <h1 className="page-title">Viajes</h1>
-          <p className="page-sub">Cada viaje junta su itinerario, lugares, fotos y gastos.</p>
+          <p className="page-sub">Del más reciente al más antiguo.</p>
         </div>
-      </div>
-
-      <div className="pill-tabs">
-        {['todos', 'pendiente', 'en_curso', 'finalizado'].map(f => (
-          <div key={f} className={`pill-tab${filter === f ? ' active' : ''}`} onClick={() => setFilter(f)}>
-            {f === 'todos' ? 'Todos' : TRIP_STATUS_LABEL[f]}
-          </div>
-        ))}
       </div>
 
       {list.length === 0 ? (
         <div className="empty-state">
+          <div className="icon-wrap"><IconPlaneTilt size={34} stroke={1.5} /></div>
           <div className="big">Todavía no hay viajes</div>
           <div className="hint">Toca el botón "+" para planificar el primero.</div>
         </div>
       ) : (
-        <div className="trip-grid">
-          {list.map(t => {
-            const placeCount = places.items.filter(p => p.tripId === t.id)
-            const visited = placeCount.filter(p => p.status === 'visitado').length
-            return (
-              <div key={t.id} className="trip-card" onClick={() => nav(`/viajes/${t.id}`)}
-                style={t.coverPhoto ? { backgroundImage: `linear-gradient(to top, rgba(11,11,13,0.92), rgba(11,11,13,0.15) 60%), url(${t.coverPhoto.url})` } : {}}>
+        <div className="trip-list">
+          {list.map(t => (
+            t.coverPhoto ? (
+              <div key={t.id} className="trip-card trip-card-photo" onClick={() => nav(`/viajes/${t.id}`)}
+                style={{ backgroundImage: `linear-gradient(to top, rgba(35,69,36,0.88), rgba(35,69,36,0.1) 60%), url(${t.coverPhoto.url})` }}>
                 <span className={`trip-status ts-${t.status}`}>{TRIP_STATUS_LABEL[t.status]}</span>
-                <div className="trip-card-body">
-                  <h3>{t.name}</h3>
-                  <div className="trip-dest">{t.destination}</div>
-                  <div className="trip-when">{fmtRange(t.dateFrom, t.dateTo)}</div>
-                  {placeCount.length > 0 && <div className="trip-places">📍 {visited}/{placeCount.length} lugares visitados</div>}
+                <div className="trip-card-photo-body">
+                  <div className="trip-name">{t.name}</div>
+                  <div className="trip-when">{t.destination}{t.destination ? ' · ' : ''}{fmtRange(t.dateFrom, t.dateTo)}</div>
                 </div>
               </div>
+            ) : (
+              <div key={t.id} className="trip-card trip-card-plain" onClick={() => nav(`/viajes/${t.id}`)}>
+                <div className="trip-plain-icon"><IconPlane size={20} stroke={1.8} /></div>
+                <div className="trip-plain-body">
+                  <div className="trip-name">{t.name}</div>
+                  <div className="trip-when">{t.destination}{t.destination ? ' · ' : ''}{fmtRange(t.dateFrom, t.dateTo)}</div>
+                </div>
+                <span className={`trip-status ts-plain ts-${t.status}`}>{TRIP_STATUS_LABEL[t.status]}</span>
+              </div>
             )
-          })}
+          ))}
         </div>
       )}
     </div>

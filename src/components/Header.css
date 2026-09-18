@@ -1,12 +1,28 @@
-.app-header { padding: 18px 18px 0; max-width: 720px; margin: 0 auto; }
-.header-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.header-title { font-size: clamp(19px, 5vw, 22px); color: var(--primary); }
-.header-tag { font-family: var(--font-body); font-weight: 400; font-size: 12.5px; color: var(--ink-soft); }
+.app-header { padding: 14px 14px 0; max-width: 720px; margin: 0 auto; }
 
-.settings-panel { margin-top: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.header-banner {
+  background: var(--forest);
+  border-radius: 18px;
+  padding: 14px 16px;
+}
+.header-row { display: flex; align-items: center; gap: 12px; }
+
+.header-badge {
+  width: 44px; height: 44px; border-radius: 50%; border: 2px dashed var(--mustard);
+  display: flex; align-items: center; justify-content: center; flex: 0 0 auto; color: var(--mustard);
+}
+.header-titles { flex: 1; min-width: 0; }
+.header-title { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--on-primary); line-height: 1.1; }
+.header-tag { font-size: 11px; color: #C9D6C6; margin-top: 3px; }
+.header-settings-btn {
+  width: 36px; height: 36px; flex: 0 0 auto; border-radius: 10px; border: none; background: rgba(255,255,255,0.12);
+  color: var(--on-primary); display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+
+.settings-panel { margin-top: 10px; padding: 12px; border: 0.5px solid var(--line); border-radius: 14px; background: var(--surface); }
 .settings-row { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: var(--ink-soft); flex-wrap: wrap; }
 .settings-row button {
-  font-size: 12.5px; padding: 6px 13px; border-radius: 20px; border: 1px solid var(--line);
+  font-size: 12.5px; font-weight: 600; padding: 6px 13px; border-radius: 20px; border: 0.5px solid var(--line);
   background: transparent; color: var(--ink-soft); cursor: pointer;
 }
 .settings-row button.active { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }

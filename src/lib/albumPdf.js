@@ -36,7 +36,7 @@ export async function exportAlbumPdf(trip, pages, onProgress) {
         requestAnimationFrame(() => requestAnimationFrame(resolve))
       })
       await waitImages(pageDiv)
-      const canvas = await html2canvas(pageDiv, { width: W, height: H, scale: 1, useCORS: true, backgroundColor: '#0B0B0D' })
+      const canvas = await html2canvas(pageDiv, { width: W, height: H, scale: 1, useCORS: true, backgroundColor: '#FFFDF8' })
       const imgData = canvas.toDataURL('image/jpeg', 0.92)
       if (i > 0) pdf.addPage([W, H])
       pdf.addImage(imgData, 'JPEG', 0, 0, W, H)

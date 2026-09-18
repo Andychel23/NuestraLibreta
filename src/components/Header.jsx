@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { IconSettings, IconPlaneTilt } from '@tabler/icons-react'
 import { useApp } from '../state/AppState'
 import { seedDemoData } from '../lib/demoData'
 import './Header.css'
@@ -20,9 +21,19 @@ export default function Header() {
 
   return (
     <header className="app-header">
-      <div className="header-row">
-        <h1 className="header-title">Nuestra Libreta <span className="header-tag">— Andy &amp; Marjorie</span></h1>
-        <button className="iconBtn" onClick={() => setOpen(o => !o)} aria-label="Ajustes">⚙️</button>
+      <div className="header-banner">
+        <div className="header-row">
+          <div className="header-badge">
+            <IconPlaneTilt size={21} stroke={2} style={{ transform: 'rotate(-20deg)' }} />
+          </div>
+          <div className="header-titles">
+            <div className="header-title">Nuestra Libreta</div>
+            <div className="header-tag">Nuestros viajes y recuerdos</div>
+          </div>
+          <button className="header-settings-btn" onClick={() => setOpen(o => !o)} aria-label="Ajustes">
+            <IconSettings size={19} />
+          </button>
+        </div>
       </div>
       {open && (
         <div className="settings-panel">
@@ -32,7 +43,7 @@ export default function Header() {
             <button className={currentUser === 'Marjorie' ? 'active' : ''} onClick={() => setCurrentUser('Marjorie')}>Marjorie</button>
           </div>
           <div className="settings-row" style={{ marginTop: 10 }}>
-            <button onClick={handleSeed} disabled={seeding}>{seeding ? 'Cargando…' : '✨ Cargar datos de ejemplo'}</button>
+            <button onClick={handleSeed} disabled={seeding}>{seeding ? 'Cargando…' : 'Cargar datos de ejemplo'}</button>
           </div>
         </div>
       )}

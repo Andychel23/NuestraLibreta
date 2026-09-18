@@ -79,9 +79,10 @@ export default function ExpenseForm({ expense, presetTripId, onDone }) {
 
       <label className="field-label">Categoría</label>
       <div className="chip-picker">
-        {EXPENSE_CATS.map(c => (
-          <button key={c.id} type="button" className={category === c.id ? 'sel' : ''} onClick={() => setCategory(c.id)}>{c.icon} {c.label}</button>
-        ))}
+        {EXPENSE_CATS.map(c => {
+          const Icon = c.icon
+          return <button key={c.id} type="button" className={category === c.id ? 'sel' : ''} onClick={() => setCategory(c.id)}><Icon size={15} stroke={1.8} />{c.label}</button>
+        })}
       </div>
 
       <label className="field-label">Fecha</label>

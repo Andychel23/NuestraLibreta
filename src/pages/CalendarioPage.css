@@ -1,48 +1,59 @@
-.cal-legend { display: flex; gap: 13px; flex-wrap: wrap; margin: 2px 0 18px; font-size: 11.5px; color: var(--ink-soft); }
+.cal-legend { display: flex; gap: 13px; flex-wrap: wrap; margin: 2px 0 18px; font-size: 11px; color: var(--ink-soft); }
 .cal-legend span { display: inline-flex; align-items: center; gap: 5px; }
 
+.cal-ic-trip { color: var(--cal-trip); }
+.cal-ic-actividad { color: var(--cal-actividad); }
+.cal-ic-fecha { color: var(--cal-fecha); }
+.cal-ic-cumple { color: var(--cal-cumple); }
+.cal-ic-pago { color: var(--cal-pago); }
+.cal-ic-reserva { color: var(--cal-reserva); }
+.cal-ic-otro { color: var(--cal-otro); }
+.cal-ic-lugar { color: var(--cal-lugar); }
+
 .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-.cal-title { font-size: 18px; text-transform: capitalize; }
+.cal-header .btn-text { display: inline-flex; align-items: center; gap: 2px; }
+.cal-title { font-family: var(--font-display); font-weight: 700; font-size: 16px; text-transform: capitalize; color: var(--ink); }
 
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
 .cal-grid-head { margin-bottom: 6px; }
-.cal-weekday { text-align: center; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); padding: 4px 0; }
+.cal-weekday { text-align: center; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); padding: 4px 0; }
 .cal-cell {
-  aspect-ratio: 1; border-radius: 10px; border: 1px solid var(--line); background: var(--surface);
+  aspect-ratio: 1; border-radius: 11px; border: 0.5px solid var(--line); background: var(--surface);
   padding: 5px; display: flex; flex-direction: column; gap: 3px;
 }
 .cal-cell-empty { border: none; background: transparent; }
-.cal-daynum { font-size: 12px; color: var(--ink-soft); }
-.cal-today { border-color: var(--primary); border-width: 2px; }
+.cal-daynum { font-size: 12px; color: var(--ink-soft); font-weight: 500; }
+.cal-today { border-color: var(--primary); border-width: 1.5px; background: var(--primary-wash); }
 .cal-today .cal-daynum { color: var(--primary); font-weight: 700; }
 .cal-cell.has-events { cursor: pointer; }
 .cal-cell.has-events:hover { border-color: var(--primary); }
-.cal-dots { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+.cal-dots { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; }
 .cal-more { font-size: 9px; color: var(--ink-soft); }
 
 .week-list { display: flex; flex-direction: column; gap: 6px; }
-.week-row { display: flex; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); align-items: flex-start; cursor: pointer; }
+.week-row { display: flex; gap: 12px; padding: 10px 12px; border: 0.5px solid var(--line); border-radius: 14px; background: var(--surface); align-items: flex-start; cursor: pointer; }
 .week-row.cal-today { border-color: var(--primary); }
 .week-daylabel { display: flex; flex-direction: column; align-items: center; width: 38px; flex: 0 0 auto; }
 .week-weekday { font-size: 10px; color: var(--ink-faint); text-transform: uppercase; }
-.week-daynum { font-size: 16px; font-weight: 700; }
+.week-daynum { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--ink); }
 .week-events { display: flex; flex-direction: column; gap: 5px; flex: 1; padding-top: 3px; }
-.week-chip { font-size: 12.5px; display: flex; align-items: center; gap: 6px; }
+.week-chip { font-size: 12.5px; display: flex; align-items: center; gap: 6px; color: var(--ink); }
 
 .agenda-list { display: flex; flex-direction: column; gap: 4px; }
-.agenda-group { display: flex; gap: 14px; padding: 10px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.agenda-group { display: flex; gap: 14px; padding: 10px 4px; border-bottom: 0.5px solid var(--line); cursor: pointer; }
 .agenda-date { width: 40px; flex: 0 0 auto; text-align: center; }
-.agenda-daynum { font-family: var(--font-display); font-size: 20px; line-height: 1; }
-.agenda-month { font-size: 10px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; }
+.agenda-daynum { font-family: var(--font-display); font-weight: 700; font-size: 19px; line-height: 1; color: var(--ink); }
+.agenda-month { font-size: 10px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
 .agenda-events { display: flex; flex-direction: column; gap: 6px; padding-top: 3px; }
-.agenda-event { font-size: 13.5px; display: flex; align-items: center; gap: 7px; }
+.agenda-event { font-size: 13.5px; display: flex; align-items: center; gap: 7px; color: var(--ink); }
 
-.upcoming { margin-top: 26px; }
-.upcoming-title { font-size: 15px; margin-bottom: 10px; }
-.upcoming-row { display: flex; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
-.upcoming-info { flex: 1; }
-.upcoming-label { font-size: 14px; }
-.upcoming-when { font-size: 11.5px; color: var(--ink-soft); margin-top: 1px; }
-.upcoming-days { font-size: 11px; color: var(--ink-soft); background: var(--surface-2); padding: 4px 8px; border-radius: 20px; flex: 0 0 auto; }
+.actividades { margin-top: 26px; }
+.actividades-title { font-size: 15px; margin-bottom: 10px; }
+.actividad-row { display: flex; align-items: center; gap: 11px; padding: 11px 0; border-bottom: 0.5px solid var(--line); cursor: pointer; }
+.actividad-ic { flex: 0 0 auto; display: flex; }
+.actividad-info { flex: 1; }
+.actividad-label { font-size: 14px; color: var(--ink); }
+.actividad-when { font-size: 11.5px; color: var(--ink-soft); margin-top: 1px; }
+.actividad-days { font-size: 11px; color: var(--ink-soft); background: var(--surface-3); padding: 4px 8px; border-radius: 20px; flex: 0 0 auto; }
 
-.day-event-row { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); margin-bottom: 8px; }
+.day-event-row { display: flex; align-items: center; gap: 11px; padding: 11px 12px; border: 0.5px solid var(--line); border-radius: 14px; background: var(--surface-2); margin-bottom: 8px; }

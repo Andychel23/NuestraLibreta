@@ -1,0 +1,12 @@
+.pendientes-quickadd { display: flex; gap: 8px; margin-bottom: 14px; }
+.pendientes-quickadd input { flex: 1; padding: 11px 14px; border: 0.5px solid var(--line); border-radius: 14px; background: var(--surface-2); font-family: var(--font-body); font-size: 14px; color: var(--ink); }
+.pendientes-quickadd button { padding: 0 18px; border-radius: 14px; border: none; background: var(--primary); color: var(--on-primary); font-weight: 700; cursor: pointer; }
+
+.todo-list { display: flex; flex-direction: column; gap: 7px; }
+.todo-row { display: flex; align-items: center; gap: 11px; padding: 12px 13px; background: var(--surface); border: 0.5px solid var(--line); border-radius: 15px; box-shadow: 0 1px 4px var(--shadow); }
+.todo-box { width: 22px; height: 22px; border: 2px solid var(--line); border-radius: 8px; flex: 0 0 auto; cursor: pointer; display: flex; align-items: center; justify-content: center; background: none; padding: 0; color: transparent; }
+.todo-row.done .todo-box { background: var(--primary); border-color: var(--primary); color: #fff; }
+.todo-txt { flex: 1; font-size: 14px; cursor: pointer; min-width: 0; color: var(--ink); }
+.todo-row.done .todo-txt { text-decoration: line-through; color: var(--ink-soft); }
+.todo-tag { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 20px; background: var(--surface-3); color: var(--ink-soft); white-space: nowrap; flex: 0 0 auto; }
+.todo-del { background: none; border: none; color: var(--ink-faint); cursor: pointer; padding: 4px; flex: 0 0 auto; display: flex; }

@@ -38,8 +38,8 @@ export async function seedDemoData({ trips, places, events, expenses, todos }) {
   await expenses.add({ description: 'Tour Kuelap', amount: 180, currency: 'PEN', paidBy: 'Marjorie', forWhom: 'ambos', category: 'tours', date: '2026-10-29', tripId, placeId: null, note: '', receipt: null, type: 'gasto' })
 
   if (todos) {
-    await todos.add({ text: 'Reservar el hotel de Chachapoyas', assignedTo: 'Andy', tripId, dueDate: '2026-10-01', done: true, doneAt: new Date().toISOString() })
-    await todos.add({ text: 'Comprar repelente y ropa de lluvia', assignedTo: 'Ambos', tripId, dueDate: '2026-10-20', done: false, doneAt: null })
-    await todos.add({ text: 'Comprar regalo cumpleaños Marjorie', assignedTo: 'Andy', tripId: null, dueDate: '2026-11-05', done: false, doneAt: null })
+    await todos.add({ text: 'Reservar el hotel de Chachapoyas', assignedTo: 'Andy', done: true, doneAt: new Date().toISOString() })
+    await todos.add({ text: 'Comprar repelente y ropa de lluvia', assignedTo: 'Ambos', done: false, doneAt: null })
+    await todos.add({ text: 'Cambiar el foco del pasillo', assignedTo: 'Andy', done: false, doneAt: null })
   }
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { IconStar, IconMapPin, IconCircleCheck } from '@tabler/icons-react'
 import { useApp } from '../state/AppState'
 import { uploadPhoto, deletePhoto } from '../lib/photos'
 import { PLACE_CATS } from '../lib/constants'
@@ -6,7 +7,7 @@ import { todayStr } from '../lib/dates'
 import PlaceMap from '../components/PlaceMap'
 
 export default function PlaceForm({ place, presetTripId, onDone }) {
-  const { places, trips, toast } = useApp()
+  const { places, toast } = useApp()
   const [name, setName] = useState(place?.name || '')
   const [country, setCountry] = useState(place?.country || 'Perú')
   const [city, setCity] = useState(place?.city || '')
@@ -17,7 +18,7 @@ export default function PlaceForm({ place, presetTripId, onDone }) {
   const [plannedDate, setPlannedDate] = useState(place?.plannedDate || '')
   const [rating, setRating] = useState(place?.rating || 0)
   const [notes, setNotes] = useState(place?.notes || '')
-  const [tripId, setTripId] = useState(place?.tripId || presetTripId || '')
+  const [tripId] = useState(place?.tripId || presetTripId || '')
   const [position, setPosition] = useState(place?.lat != null ? [place.lat, place.lng] : null)
   const [photos, setPhotos] = useState(place?.photos || [])
   const [showMap, setShowMap] = useState(false)
@@ -57,7 +58,7 @@ export default function PlaceForm({ place, presetTripId, onDone }) {
     try {
       if (place) await places.update(place.id, data)
       else await places.add(data)
-      toast(status === 'visitado' ? '¡Lugar sellado! 🎉' : 'Lugar guardado.')
+      toast(status === 'visitado' ? '¡Lugar sellado!' : 'Lugar guardado.')
       onDone()
     } catch { toast('No se pudo guardar. Intenta de nuevo.') }
     setSaving(false)
@@ -84,21 +85,16 @@ export default function PlaceForm({ place, presetTripId, onDone }) {
 
       <label className="field-label">Categoría</label>
       <div className="chip-picker">
-        {PLACE_CATS.map(c => (
-          <button key={c.id} type="button" className={category === c.id ? 'sel' : ''} onClick={() => setCategory(c.id)}>{c.icon} {c.label}</button>
-        ))}
+        {PLACE_CATS.map(c => {
+          const Icon = c.icon
+          return <button key={c.id} type="button" className={category === c.id ? 'sel' : ''} onClick={() => setCategory(c.id)}><Icon size={15} stroke={1.8} />{c.label}</button>
+        })}
       </div>
-
-      <label className="field-label">Viaje asociado (opcional)</label>
-      <select value={tripId} onChange={e => setTripId(e.target.value)}>
-        <option value="">— Sin viaje asociado —</option>
-        {trips.items.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
-      </select>
 
       <label className="field-label">Ubicación en el mapa (opcional)</label>
       {position ? (
         <div className="mini-map-preview">
-          <button type="button" className="btn-text" onClick={() => setShowMap(s => !s)}>{showMap ? 'Ocultar mapa' : `📍 ${position[0].toFixed(4)}, ${position[1].toFixed(4)} — cambiar`}</button>
+          <button type="button" className="btn-text" onClick={() => setShowMap(s => !s)}><IconMapPin size={14} />{showMap ? 'Ocultar mapa' : `${position[0].toFixed(4)}, ${position[1].toFixed(4)} — cambiar`}</button>
         </div>
       ) : (
         <button type="button" className="btn-text" onClick={() => setShowMap(s => !s)}>{showMap ? 'Ocultar mapa' : '+ Marcar en el mapa'}</button>
@@ -112,8 +108,8 @@ export default function PlaceForm({ place, presetTripId, onDone }) {
 
       <label className="field-label">Estado</label>
       <div className="chip-picker">
-        <button type="button" className={status === 'pendiente' ? 'sel' : ''} onClick={() => setStatus('pendiente')}>📌 Por visitar</button>
-        <button type="button" className={status === 'visitado' ? 'sel' : ''} onClick={() => setStatus('visitado')}>✅ Ya lo visitamos</button>
+        <button type="button" className={status === 'pendiente' ? 'sel' : ''} onClick={() => setStatus('pendiente')}><IconMapPin size={15} stroke={1.8} />Por visitar</button>
+        <button type="button" className={status === 'visitado' ? 'sel' : ''} onClick={() => setStatus('visitado')}><IconCircleCheck size={15} stroke={1.8} />Ya lo visitamos</button>
       </div>
 
       {status === 'pendiente' && (
@@ -131,7 +127,7 @@ export default function PlaceForm({ place, presetTripId, onDone }) {
           <label className="field-label">Calificación</label>
           <div className="stars">
             {[1, 2, 3, 4, 5].map(n => (
-              <span key={n} className={n <= rating ? 'star on' : 'star'} onClick={() => setRating(n === rating ? 0 : n)}>★</span>
+              <button type="button" key={n} className={n <= rating ? 'star-btn on' : 'star-btn'} onClick={() => setRating(n === rating ? 0 : n)}><IconStar size={22} fill={n <= rating ? 'currentColor' : 'none'} stroke={1.8} /></button>
             ))}
           </div>
 

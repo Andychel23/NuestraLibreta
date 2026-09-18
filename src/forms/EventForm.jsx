@@ -45,9 +45,10 @@ export default function EventForm({ event, date, onDone }) {
 
       <label className="field-label">Tipo de evento</label>
       <div className="chip-picker">
-        {EVENT_TYPES.map(t => (
-          <button key={t.id} type="button" className={type === t.id ? 'sel' : ''} onClick={() => setType(t.id)}>{t.icon} {t.label}</button>
-        ))}
+        {EVENT_TYPES.map(t => {
+          const Icon = t.icon
+          return <button key={t.id} type="button" className={type === t.id ? 'sel' : ''} onClick={() => setType(t.id)}><Icon size={15} stroke={1.8} />{t.label}</button>
+        })}
       </div>
 
       <label className="field-label">Fecha y hora</label>

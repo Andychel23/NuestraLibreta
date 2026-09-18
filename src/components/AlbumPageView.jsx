@@ -1,3 +1,4 @@
+import { IconPlaneTilt } from '@tabler/icons-react'
 import { placeMeta, tripSummaryLines } from '../lib/album'
 import { fmtDate, fmtRange } from '../lib/dates'
 import { catInfo, PLACE_CATS } from '../lib/constants'
@@ -16,7 +17,7 @@ function CoverPage({ trip }) {
     return (
       <div className="ap-coverPhoto" style={{ backgroundImage: `url(${trip.coverPhoto.url})` }}>
         <div className="ap-coverPhotoOverlay">
-          <div className="ap-coverEyebrow">🧳 Nuestra Libreta</div>
+          <div className="ap-coverEyebrow"><IconPlaneTilt size={14} stroke={2} style={{ verticalAlign: 'middle', marginRight: 4 }} />Nuestra Libreta</div>
           <div className="ap-coverTitle">{trip.name}</div>
           {trip.destination && <div className="ap-coverCity">{trip.destination}</div>}
           {range && <div className="ap-coverDates">{range}</div>}
@@ -27,7 +28,7 @@ function CoverPage({ trip }) {
   }
   return (
     <div className="ap-coverSolid">
-      <div className="ap-coverEyebrow">🧳 Nuestra Libreta</div>
+      <div className="ap-coverEyebrow"><IconPlaneTilt size={14} stroke={2} style={{ verticalAlign: 'middle', marginRight: 4 }} />Nuestra Libreta</div>
       <div className="ap-coverTitle">{trip.name}</div>
       {trip.destination && <div className="ap-coverCity">{trip.destination}</div>}
       {range && <div className="ap-coverDates">{range}</div>}
@@ -75,9 +76,10 @@ function ResumenPage({ trip, visited, spent }) {
               <div className="ap-resumenColTitle">Lugares visitados ({visited.length})</div>
               {visited.map(p => {
                 const c = catInfo(PLACE_CATS, p.category)
+                const Icon = c.icon
                 return (
                   <div key={p.id} className="ap-placeRow">
-                    <span className="ap-placeIcon">{c.icon}</span>
+                    <span className="ap-placeIcon"><Icon size={13} stroke={1.8} /></span>
                     <span className="ap-placeName">{p.name}{p.rating ? ' ' + '★'.repeat(p.rating) : ''}</span>
                     <span className="ap-placeDate">{fmtDate(p.visitDate, { day: 'numeric', month: 'short' })}</span>
                   </div>
@@ -100,13 +102,14 @@ function ResumenPage({ trip, visited, spent }) {
 
 function PhotosPage({ place, photos, showHeader }) {
   const { c, meta } = placeMeta(place)
+  const Icon = c.icon
   const hero = photos[0]?.url
   return (
     <div className="ap-sitioPage">
       {showHeader && (
         <div className="ap-sitioHeader" style={hero ? { backgroundImage: `url(${hero})` } : {}}>
           <div className="ap-sitioHeaderOverlay">
-            <div className="ap-sitioHeaderEyebrow">{c.icon} {c.label}</div>
+            <div className="ap-sitioHeaderEyebrow"><Icon size={12} stroke={2} style={{ verticalAlign: 'middle', marginRight: 4 }} />{c.label}</div>
             <div className="ap-sitioHeaderTitle">{place.name}</div>
             {meta && <div className="ap-sitioHeaderMeta">{meta}</div>}
           </div>

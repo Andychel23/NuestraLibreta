@@ -1,16 +1,19 @@
 .bottom-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
   display: flex; justify-content: center;
-  background: rgba(23, 23, 26, 0.92); backdrop-filter: blur(14px);
-  border-top: 1px solid var(--line);
+  background: var(--surface);
+  border-top: 0.5px solid var(--line);
   padding-bottom: var(--safe-b);
+  box-shadow: 0 -1px 8px var(--shadow);
 }
 .bn-item {
-  flex: 1; max-width: 140px; display: flex; flex-direction: column; align-items: center; gap: 3px;
-  padding: 10px 4px 8px; text-decoration: none; color: var(--ink-faint); height: var(--nav-h);
-  justify-content: center; transition: color 0.15s;
+  flex: 1; max-width: 150px; display: flex; align-items: center; justify-content: center;
+  padding: 9px 4px; text-decoration: none; color: var(--ink-soft); height: var(--nav-h);
 }
-.bn-icon { font-size: 20px; filter: grayscale(1) opacity(0.6); transition: 0.15s; }
-.bn-label { font-size: 10.5px; font-weight: 600; letter-spacing: 0.01em; }
+.bn-pill {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 5px 13px; border-radius: 12px; transition: background 0.15s;
+}
+.bn-label { font-size: 11.5px; font-weight: 600; }
 .bn-item.active { color: var(--primary); }
-.bn-item.active .bn-icon { filter: none; transform: translateY(-1px); }
+.bn-item.active .bn-pill { background: var(--primary-wash); }

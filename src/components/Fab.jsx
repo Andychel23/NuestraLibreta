@@ -1,13 +1,14 @@
 import { useState } from 'react'
+import { IconPlus, IconX, IconPlaneTilt, IconCalendarEvent, IconChecklist } from '@tabler/icons-react'
+import IconCoin from './icons/IconCoin'
 import { useApp } from '../state/AppState'
 import './Fab.css'
 
 const ACTIONS = [
-  { key: 'trip', icon: '🧳', label: 'Nuevo viaje' },
-  { key: 'place', icon: '📍', label: 'Nuevo lugar' },
-  { key: 'event', icon: '📅', label: 'Nuevo evento' },
-  { key: 'expense', icon: '💰', label: 'Nuevo gasto' },
-  { key: 'todo', icon: '✅', label: 'Nueva tarea' },
+  { key: 'trip', icon: IconPlaneTilt, label: 'Nuevo viaje' },
+  { key: 'event', icon: IconCalendarEvent, label: 'Nueva actividad' },
+  { key: 'expense', icon: IconCoin, label: 'Nuevo gasto' },
+  { key: 'todo', icon: IconChecklist, label: 'Nueva tarea' },
 ]
 
 export default function Fab() {
@@ -17,7 +18,6 @@ export default function Fab() {
   function pick(key) {
     setOpen(false)
     if (key === 'trip') openSheet('trip-form')
-    if (key === 'place') openSheet('place-form')
     if (key === 'event') openSheet('event-form')
     if (key === 'expense') openSheet('expense-form')
     if (key === 'todo') openSheet('todo-form')
@@ -27,15 +27,18 @@ export default function Fab() {
     <div className="fab-wrap">
       {open && <div className="fab-scrim" onClick={() => setOpen(false)} />}
       <div className={`fab-menu${open ? ' open' : ''}`}>
-        {ACTIONS.map((a, i) => (
-          <button key={a.key} className="fab-action" style={{ transitionDelay: `${i * 25}ms` }} onClick={() => pick(a.key)}>
-            <span className="fab-action-label">{a.label}</span>
-            <span className="fab-action-icon">{a.icon}</span>
-          </button>
-        ))}
+        {ACTIONS.map((a, i) => {
+          const Icon = a.icon
+          return (
+            <button key={a.key} className="fab-action" style={{ transitionDelay: `${i * 25}ms` }} onClick={() => pick(a.key)}>
+              <span className="fab-action-label">{a.label}</span>
+              <span className="fab-action-icon"><Icon size={19} stroke={1.8} /></span>
+            </button>
+          )
+        })}
       </div>
       <button className={`fab${open ? ' fab-open' : ''}`} onClick={() => setOpen(o => !o)} aria-label="Crear">
-        +
+        {open ? <IconX size={26} /> : <IconPlus size={26} />}
       </button>
     </div>
   )
