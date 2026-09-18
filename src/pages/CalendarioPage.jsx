@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { IconChevronLeft, IconChevronRight, IconPlane, IconMapPin } from '@tabler/icons-react'
 import { useApp } from '../state/AppState'
 import { MONTH_NAMES, WEEKDAY_LABELS, buildMonthGrid, buildWeekDays, nextOccurrence, daysUntil, toDate } from '../lib/dates'
@@ -53,7 +54,23 @@ export default function CalendarioPage() {
   const [cursor, setCursor] = useState(new Date())
   const [dayModal, setDayModal] = useState(null) // { dateStr, list }
   const evMap = useAllEvents()
-  const { openSheet } = useApp()
+  const { openSheet, places, events } = useApp()
+  const nav = useNavigate()
+
+  function handleEventClick(ev) {
+    if (ev.kind === 'evento') {
+      const full = events.items.find(e => e.id === ev.refId)
+      if (full) openSheet('event-form', { event: full })
+    } else if (ev.kind === 'trip') {
+      nav(`/viajes/${ev.refId}`)
+    } else if (ev.kind === 'itinerario') {
+      nav(`/viajes/${ev.refId}`)
+    } else if (ev.kind === 'lugar') {
+      const full = places.items.find(p => p.id === ev.refId)
+      if (full) openSheet('place-form', { place: full })
+    }
+    setDayModal(null)
+  }
 
   const year = cursor.getFullYear(), month = cursor.getMonth()
   const today = new Date()
@@ -120,7 +137,7 @@ export default function CalendarioPage() {
         {actividades.map(ev => {
           const Icon = ev.icon
           return (
-            <div key={ev.id} className="actividad-row" onClick={() => openDay(ev.dateStr)}>
+            <div key={ev.id} className="actividad-row" onClick={() => handleEventClick(ev)}>
               <span className={`actividad-ic cal-ic-${ev.color}`}><Icon size={17} stroke={1.8} /></span>
               <div className="actividad-info">
                 <div className="actividad-label">{ev.label}</div>
@@ -138,7 +155,7 @@ export default function CalendarioPage() {
         {dayModal && dayModal.list.map(ev => {
           const Icon = ev.icon
           return (
-            <div key={ev.id} className="day-event-row">
+            <div key={ev.id} className="day-event-row" onClick={() => handleEventClick(ev)}>
               <span className={`actividad-ic cal-ic-${ev.color}`}><Icon size={17} stroke={1.8} /></span>
               <div>
                 <div className="actividad-label">{ev.label}</div>
